@@ -122,7 +122,7 @@ const AdminEvent: React.FC = () => {
               {eventData.smallDate}
             </Typography>
             <Typography fontWeight={500} fontSize="0.875rem">
-              {eventData.title}
+              {eventData.name}
             </Typography>
           </TableCell>
           <TableCell align="center">
@@ -188,23 +188,15 @@ const AdminEvent: React.FC = () => {
                       }}
                     >
                       <Typography fontSize="0.625rem">
-                        총{' '}
-                        <span className="count">{eventData.participation}</span>
-                        명
+                        총 <span className="count">{eventData.minApply}</span>명
                       </Typography>
                       <Typography fontSize="0.625rem">
                         시각장애러너{' '}
-                        <span className="count">
-                          {eventData.viParticipation}
-                        </span>
-                        명
+                        <span className="count">{eventData.minNumV}</span>명
                       </Typography>
                       <Typography fontSize="0.625rem">
                         가이드러너{' '}
-                        <span className="count">
-                          {eventData.guideParticipation}
-                        </span>
-                        명
+                        <span className="count">{eventData.minNumG}</span>명
                       </Typography>
                     </Stack>
                   </Box>
