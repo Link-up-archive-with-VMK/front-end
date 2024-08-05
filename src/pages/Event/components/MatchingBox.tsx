@@ -53,14 +53,17 @@ const MatchingBox: React.FC<MatchingBoxProps> = ({
 
   return (
     <Stack
+      role={matchingMode ? 'grid' : 'text'}
       direction="row"
       gap="1.25rem"
-      aria-label={`${viData.name}의 가이드 ${guideList?.guide.join(', ')}`}
+      aria-label={`${viData.name}의 가이드러너 ${guideList?.guide
+        .map(({ name }) => name)
+        .join(', ')}`}
     >
       <ApplyUserChip
         selected={selectedVi === viData.userId}
         clickable={matchingMode}
-        isAttend={matchingMode ? false : viData.isAttened}
+        isAttend={matchingMode ? false : viData.isAttended}
         type={DisabilityEnum.VI}
         name={viData.name}
         onClick={() => onViSelect(viData.userId, viData.name)}
@@ -72,7 +75,7 @@ const MatchingBox: React.FC<MatchingBoxProps> = ({
               selected={selectedGuide === user.userId}
               clickable={matchingMode}
               key={`guide-${user.userId}`}
-              isAttend={matchingMode ? false : user.isAttened}
+              isAttend={matchingMode ? false : user.isAttended}
               type={DisabilityEnum.GUIDE}
               name={user.name}
               onClick={() => onGuideSelect(user.userId, user.name)}

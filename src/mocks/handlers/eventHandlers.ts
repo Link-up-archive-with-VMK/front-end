@@ -61,8 +61,9 @@ export const eventHandlers: HttpHandler[] = [
     baseURL + '/event/pop/:eventId',
     ({ params }) => {
       return HttpResponse.json({
-        content: '테스트용 이벤트입니다!',
-        date: '0000-00-00',
+        content:
+          '프로그램 내용\nA조, B조\n1. 준비체조 및 훈련공지 (10분)\n2.워밍업 (10분)\n3. 코어운동 트레이닝 10가지 트레이닝\n4. 인터벌 트레이닝 100M+100M(2000M) 10set\n5.마무리 스트레칭 및 질의응답(15분)',
+        date: '2020-01-01',
         startTime: '00:00',
         endTime: '00:00',
         eventId: Number(params.eventId),
@@ -70,7 +71,7 @@ export const eventHandlers: HttpHandler[] = [
         place: '테스트 장소',
         recruitStatus: RecruitStatus.Open,
         type: EventType.Training,
-        updatedAt: '0000-00-00',
+        updatedAt: '2020-01-01',
         hasPartner: false,
         isApply: true,
         organizer: '홍길동',
@@ -387,9 +388,10 @@ export const eventHandlers: HttpHandler[] = [
     () => {
       return HttpResponse.json({
         checkOrganizer: true,
-        created_at: '0000-00-00',
+        created_at: '2020-02-02',
         date: '2000-12-22',
-        details: '테스트용 이벤트 상세 내용',
+        details:
+          '프로그램 내용\nA조, B조\n1. 준비체조 및 훈련공지 (10분)\n2.워밍업 (10분)\n3. 코어운동 트레이닝 10가지 트레이닝\n4. 인터벌 트레이닝 100M+100M(2000M) 10set\n5.마무리 스트레칭 및 질의응답(15분)',
         startTime: '01:00',
         endTime: '10:00',
         eventId: 1,
@@ -410,10 +412,10 @@ export const eventHandlers: HttpHandler[] = [
         recruitEndDate: '2024-06-12',
         recruitStartDate: '2024-06-12',
         recruitStatus: RecruitStatus.End,
-        status: EventStatus.Open,
+        status: EventStatus.End,
         submit: true,
         type: EventType.Competition,
-        updated_at: '0000-00-00',
+        updated_at: '2020-02-02',
       });
     },
   ),
@@ -462,7 +464,17 @@ export const eventHandlers: HttpHandler[] = [
           {
             commentId: 3324224,
             content:
-              '너무 좋은2 기이이이이이이이이이이 이이이이이이이이 이이이이이이이 이이이이이이이이이이이 이이이이f 이이이이이이이인 문장',
+              '너무 좋은2 기이이이이이이이이이이\n이이이이이이이이 이이이이이이이 이이이이이이이이이이이 이이이이f 이이이이이이이인 문장',
+            createdAt: '2000-01-02',
+            likes: 22,
+            name: '사오정',
+            type: DisabilityEnum.VI,
+            userId: '1233',
+          },
+          {
+            commentId: 332424234324,
+            content:
+              '너무 좋은2 기이이이이이이이이이이\n이이이이이이이이 이이이이이이이\n\n\n\n\n\n\n이이fdfdsfdsakl\n\n\n\n\n\n이이이이이이이이이 이이이이f 이이이이이이이인 문장',
             createdAt: '2000-01-02',
             likes: 22,
             name: '사오정',
@@ -755,104 +767,99 @@ export const eventHandlers: HttpHandler[] = [
             name: 'VI1',
             type: DisabilityEnum.VI,
             userId: '1312sdfs31',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: 'VI2',
             type: DisabilityEnum.VI,
             userId: '1312fsdsfsd31',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: 'VI3',
             type: DisabilityEnum.VI,
             userId: '131sf2bv31',
-            isAttened: true,
+            isAttended: true,
           },
           {
             name: 'VI4',
             type: DisabilityEnum.VI,
             userId: '13sdfsdfssfs1231',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: 'VI5',
             type: DisabilityEnum.VI,
             userId: '1sdf31ghgfcg231',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: 'VI6',
             type: DisabilityEnum.VI,
             userId: '1312sdffvbhfs31',
-            isAttened: true,
+            isAttended: true,
           },
           {
             name: 'VI7',
             type: DisabilityEnum.VI,
             userId: '131sfssdfs2fdcv31',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: '가이드1',
             type: DisabilityEnum.GUIDE,
             userId: '13vbf42',
-            isAttened: true,
+            isAttended: true,
           },
           {
             name: '가이드2',
             type: DisabilityEnum.GUIDE,
             userId: '15ghtfv6',
-            isAttened: true,
+            isAttended: true,
           },
           {
             name: '가이드3',
             type: DisabilityEnum.GUIDE,
             userId: 'vbbxdv1',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: '가이드4',
             type: DisabilityEnum.GUIDE,
 
             userId: 'jrgsgdfgdyr1',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: '가이드5',
             type: DisabilityEnum.GUIDE,
             userId: '1dfgdfgerervsd',
-            isAttened: true,
-          },
-          {
-            name: '가이드6',
-            type: DisabilityEnum.GUIDE,
-            userId: '1663dfgdf4r',
-            isAttened: false,
+            isAttended: true,
           },
           {
             name: '가이드7',
             type: DisabilityEnum.GUIDE,
             userId: '1njsfdfgdfg',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: '가이드8',
             type: DisabilityEnum.GUIDE,
             userId: '16dfgdfwef',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: '가이드9',
             type: DisabilityEnum.GUIDE,
             userId: '1fbdfh5dfgdfg',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: '가이드10',
             type: DisabilityEnum.GUIDE,
             userId: '1gdfgrtadasda4',
             isAttened: true,
+            isAttended: true,
           },
         ],
       });
@@ -877,43 +884,43 @@ export const eventHandlers: HttpHandler[] = [
             name: 'VI1',
             type: DisabilityEnum.VI,
             userId: '1312sdfs31',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: 'VI2',
             type: DisabilityEnum.VI,
             userId: '1312fsdsfsd31',
-            isAttened: true,
+            isAttended: true,
           },
           {
             name: 'VI3',
             type: DisabilityEnum.VI,
             userId: '131sf2bv31',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: 'VI4',
             type: DisabilityEnum.VI,
             userId: '13sdfsdfssfs1231',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: 'VI5',
             type: DisabilityEnum.VI,
             userId: '1sdf31ghgfcg231',
-            isAttened: true,
+            isAttended: true,
           },
           {
             name: 'VI6',
             type: DisabilityEnum.VI,
             userId: '1312sdffvbhfs31',
-            isAttened: false,
+            isAttended: false,
           },
           {
             name: 'VI7',
             type: DisabilityEnum.VI,
             userId: '131sfssdfs2fdcv31',
-            isAttened: true,
+            isAttended: true,
           },
         ],
       });
@@ -934,26 +941,26 @@ export const eventHandlers: HttpHandler[] = [
     { eventId: string; viId: string },
     NoneType,
     EventMatchedGuideGetResponse
-  >(baseURL + '/event/:eventId/match/:viId', () => {
+  >(baseURL + '/event/:eventId/match/:viId/list', () => {
     return HttpResponse.json({
       guide: [
         {
           name: '가이드1',
           type: DisabilityEnum.GUIDE,
           userId: '13vbf42',
-          isAttened: true,
+          isAttended: true,
         },
         {
           name: '가이드2',
           type: DisabilityEnum.GUIDE,
           userId: '15ghtfv6',
-          isAttened: false,
+          isAttended: false,
         },
         {
           name: '가이드3',
           type: DisabilityEnum.GUIDE,
           userId: 'vbbxdv1',
-          isAttened: false,
+          isAttended: false,
         },
       ],
     });

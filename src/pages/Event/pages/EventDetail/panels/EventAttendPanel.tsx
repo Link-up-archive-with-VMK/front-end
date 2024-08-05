@@ -9,11 +9,14 @@ import {
   Typography,
 } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import eventApi from '@/apis/requests/event';
 import { ApplyUserChip, DisabilityChip } from '@/components/shared';
+import { RootState } from '@/store/index';
 import { DisabilityEnum } from '@/types/group';
+import getAuthority from '@/utils/authority';
 
 //
 //
@@ -65,6 +68,7 @@ export const StyledUserListBox = styled.div`
 const EventAttendPanel: React.FC<EventAttendPanelProps> = ({ isOwner }) => {
   const [attendMode, setAttendMode] = React.useState(false);
   const eventId = Number(useParams<{ eventId: string }>().eventId);
+  const { role } = useSelector((state: RootState) => state.user);
   const queryClient = useQueryClient();
 
   const { data: applyCount, isLoading: isApplyCountLoading } = useQuery({
@@ -107,15 +111,11 @@ const EventAttendPanel: React.FC<EventAttendPanelProps> = ({ isOwner }) => {
     if (applyCount) {
       return (
         <StyledCountBox>
-          <Typography aria-label={`총 ${applyCount.count}명`}>
+          <Typography role="text">
             <span style={{ fontSize: '1.25rem' }}>총 </span>
             <span style={{ color: '#FF4040' }}>{applyCount.count}</span>명
           </Typography>
-          <Stack
-            direction="row"
-            gap="1rem"
-            aria-label={`시각장애러너 ${applyCount.vi}명 가이드러너 ${applyCount.vi} 명`}
-          >
+          <Stack direction="row" gap="1rem" role="text">
             <Stack direction="row" gap="0.25rem" alignItems="center">
               <DisabilityChip component="chip" type={DisabilityEnum.VI} />
               <Typography>
@@ -138,7 +138,7 @@ const EventAttendPanel: React.FC<EventAttendPanelProps> = ({ isOwner }) => {
    *
    */
   const renderMode = () => {
-    if (isOwner) {
+    if (getAuthority.isEditor(role) || isOwner) {
       return (
         <Stack
           direction="row"

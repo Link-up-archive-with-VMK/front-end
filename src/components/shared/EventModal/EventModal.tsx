@@ -6,7 +6,6 @@ import {
   IconButton,
   DialogContent,
   DialogTitle,
-  Divider,
   CircularProgress,
   Stack,
   Button,
@@ -25,6 +24,7 @@ import { TitleContentRow } from '../TitleContentRow';
 import eventApi from '@/apis/requests/event';
 import { BROWSER_PATH } from '@/constants/path';
 import { RecruitStatus, EventStatus as EventStatusType } from '@/types/group';
+import { getFullKoreanDate, getPeriod } from '@/utils/time';
 
 interface EventModalProps {
   eventId: number;
@@ -42,6 +42,11 @@ const EventModal: React.FC<EventModalProps> = ({
     queryFn: () => eventApi.eventPopupGet({ eventId }),
     enabled: isOpen,
   });
+
+  const isEndEvent =
+    eventData &&
+    (eventData.status === EventStatusType.End ||
+      eventData.recruitStatus === RecruitStatus.End);
 
   /**
    *
@@ -87,7 +92,7 @@ const EventModal: React.FC<EventModalProps> = ({
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '1.75rem',
+            gap: '0.75rem',
             '&::-webkit-scrollbar': {
               display: 'none',
             },
@@ -107,12 +112,18 @@ const EventModal: React.FC<EventModalProps> = ({
             }
           />
           <TitleContentRow
-            title="일시"
+            title="날짜"
             content={
-              <Typography component="span" display="flex" gap="0.5rem">
-                {eventData.date.replace(/-/g, '.')}
-                <Divider orientation="vertical" variant="middle" flexItem />
-                {eventData.startTime}~{eventData.endTime}
+              <Typography>
+                {getFullKoreanDate(new Date(eventData.date))}
+              </Typography>
+            }
+          />
+          <TitleContentRow
+            title="시간"
+            content={
+              <Typography>
+                {getPeriod(eventData.startTime, eventData.endTime)}
               </Typography>
             }
           />
@@ -120,51 +131,43 @@ const EventModal: React.FC<EventModalProps> = ({
             title="장소"
             content={<Typography>{eventData.place}</Typography>}
           />
-          <TitleContentRow
-            title={
-              eventData.status === EventStatusType.End ||
-              eventData.recruitStatus === RecruitStatus.End
-                ? '참여인원'
-                : '모집인원'
-            }
-            alignItems="flex-start"
-            content={
-              <Typography display="flex" flexDirection="column" gap="0.5rem">
-                <span>
-                  시각장애러너
-                  <span
-                    style={{
-                      color: '#DE1313',
-                    }}
-                  >
-                    {` ${
-                      eventData.status === EventStatusType.End ||
-                      eventData.recruitStatus === RecruitStatus.End
-                        ? eventData.viCnt
-                        : eventData.recruitVi
-                    }`}
+          {isEndEvent && (
+            <TitleContentRow
+              title="참여인원"
+              alignItems="flex-start"
+              content={
+                <Typography
+                  role="text"
+                  display="flex"
+                  flexDirection="column"
+                  gap="0.5rem"
+                >
+                  <span>
+                    시각장애러너
+                    <span
+                      style={{
+                        color: '#DE1313',
+                      }}
+                    >
+                      {eventData.viCnt}
+                    </span>
+                    명
                   </span>
-                  명
-                </span>
-                <span>
-                  가이드러너
-                  <span
-                    style={{
-                      color: '#DE1313',
-                    }}
-                  >
-                    {` ${
-                      eventData.status === EventStatusType.End ||
-                      eventData.recruitStatus === RecruitStatus.End
-                        ? eventData.guideCnt
-                        : eventData.recruitGuide
-                    }`}
+                  <span>
+                    가이드러너
+                    <span
+                      style={{
+                        color: '#DE1313',
+                      }}
+                    >
+                      {eventData.guideCnt}
+                    </span>
+                    명
                   </span>
-                  명
-                </span>
-              </Typography>
-            }
-          />
+                </Typography>
+              }
+            />
+          )}
           {eventData.isApply ? (
             <TitleContentRow
               title="내 파트너"
@@ -203,7 +206,12 @@ const EventModal: React.FC<EventModalProps> = ({
             flexDirection="column"
             gap="0.5rem"
           >
-            <Typography component="h3" fontWeight={700}>
+            <Typography
+              component="h3"
+              fontWeight={700}
+              fontSize="1.0625rem"
+              paddingLeft="0.5rem"
+            >
               훈련 상세
             </Typography>
             <Box
@@ -211,7 +219,11 @@ const EventModal: React.FC<EventModalProps> = ({
               border="1px solid #D9D9D9"
               borderRadius="0.5rem"
             >
-              <Typography fontSize="0.8125rem" lineHeight="1.25rem">
+              <Typography
+                fontSize="0.8125rem"
+                lineHeight="1.25rem"
+                whiteSpace="break-spaces"
+              >
                 {eventData.content}
               </Typography>
             </Box>
@@ -237,7 +249,7 @@ const EventModal: React.FC<EventModalProps> = ({
               variant="chip"
               size="large"
             >
-              이벤트 신청하러 가기
+              이벤트 상세페이지 이동
             </Button>
           );
         default:
@@ -250,7 +262,7 @@ const EventModal: React.FC<EventModalProps> = ({
               size="large"
               onClick={() => onModalClose()}
             >
-              지난 이벤트 둘러보기
+              이벤트 참여결과 보러가기
             </Button>
           );
       }
