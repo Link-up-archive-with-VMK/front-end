@@ -8,6 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack/webpack.dev.js --hot",
     "build": "webpack --config webpack/webpack.prod.js",
+    "postbuild": "react-snap",
     "dev": "webpack --config webpack/webpack.dev.js",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
@@ -53,6 +54,7 @@
     "html-webpack-plugin": "^5.5.3",
     "msw": "^2.0.11",
     "prettier": "^3.1.0",
+    "react-snap": "^1.23.0",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.5.1",
     "typescript": "*",
