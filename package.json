@@ -8,7 +8,6 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack/webpack.dev.js --hot",
     "build": "webpack --config webpack/webpack.prod.js",
-    "postbuild": "react-snap",
     "dev": "webpack --config webpack/webpack.dev.js",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
