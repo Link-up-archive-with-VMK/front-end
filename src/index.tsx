@@ -1,5 +1,4 @@
 import React from 'react';
-import { hydrate, render } from 'react-dom';
 
 import { ThemeProvider } from '@mui/material';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
@@ -46,25 +45,19 @@ async function enableMocking() {
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <React.StrictMode>
-    <HelmetProvider>
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <ThemeProvider theme={theme}>
-            <Route />
-          </ThemeProvider>
-        </QueryClientProvider>
-      </Provider>
-    </HelmetProvider>
-  </React.StrictMode>
-);
-
 enableMocking().then(() => {
-  if (rootNode.hasChildNodes()) {
-    hydrate(<App />, rootNode);
-  } else {
-    render(<App />, rootNode);
-  }
+  ReactDOM.createRoot(rootNode).render(
+    <React.StrictMode>
+      <HelmetProvider>
+        <Provider store={store}>
+          <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <ThemeProvider theme={theme}>
+              <Route />
+            </ThemeProvider>
+          </QueryClientProvider>
+        </Provider>
+      </HelmetProvider>
+    </React.StrictMode>,
+  );
 });

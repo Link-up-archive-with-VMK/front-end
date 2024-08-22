@@ -892,7 +892,6 @@ export const eventHandlers: HttpHandler[] = [
             name: '가이드10',
             type: DisabilityEnum.GUIDE,
             userId: '1gdfgrtadasda4',
-            isAttened: true,
             isAttended: true,
           },
         ],
