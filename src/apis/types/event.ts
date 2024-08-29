@@ -391,10 +391,8 @@ export type EventApplyCountGetResponse = {
 
 export type EventApplyStatusGetRequest = Pick<Event, 'eventId'>;
 
-export type ApplyUserType = {
-  userId: string;
-  type: DisabilityEnum;
-  name: string;
+export type ApplyUserType = Pick<UserType, 'userId' | 'type' | 'name'> & {
+  applyRecord: RunningGroup;
 };
 
 export type EventApplyStatusGetResponse = {
