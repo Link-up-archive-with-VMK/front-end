@@ -202,26 +202,9 @@ const EventMatchingPanel: React.FC<EventMatchingPanelProps> = ({ isOwner }) => {
 
     if (!notMatchedList || !matchedList) return <>에러 발생</>;
 
-    if ((applyCount?.count ?? 0) > 30) {
-      return (
-        <MatchingGroupContainer
-          matchingMode={matchingMode}
-          guideOfNotMatched={notMatchedList.notMatch.filter(
-            (user) => user.type === DisabilityEnum.GUIDE,
-          )}
-          selectedGuide={selectedGuide}
-          selectedVi={selectedVi}
-          viOfMatched={matchedList.vi}
-          viOfnotMatched={notMatchedList.notMatch.filter(
-            (user) => user.type === DisabilityEnum.VI,
-          )}
-          onGuideSelect={handleUserSelect(DisabilityEnum.GUIDE)}
-          onViSelect={handleUserSelect(DisabilityEnum.VI)}
-        />
-      );
-    }
+    // if ((applyCount?.count ?? 0) > 30) {
     return (
-      <MatchingNonGroupContainer
+      <MatchingGroupContainer
         matchingMode={matchingMode}
         guideOfNotMatched={notMatchedList.notMatch.filter(
           (user) => user.type === DisabilityEnum.GUIDE,
@@ -236,6 +219,23 @@ const EventMatchingPanel: React.FC<EventMatchingPanelProps> = ({ isOwner }) => {
         onViSelect={handleUserSelect(DisabilityEnum.VI)}
       />
     );
+    // }
+    // return (
+    //   <MatchingNonGroupContainer
+    //     matchingMode={matchingMode}
+    //     guideOfNotMatched={notMatchedList.notMatch.filter(
+    //       (user) => user.type === DisabilityEnum.GUIDE,
+    //     )}
+    //     selectedGuide={selectedGuide}
+    //     selectedVi={selectedVi}
+    //     viOfMatched={matchedList.vi}
+    //     viOfnotMatched={notMatchedList.notMatch.filter(
+    //       (user) => user.type === DisabilityEnum.VI,
+    //     )}
+    //     onGuideSelect={handleUserSelect(DisabilityEnum.GUIDE)}
+    //     onViSelect={handleUserSelect(DisabilityEnum.VI)}
+    //   />
+    // );
   };
 
   return (

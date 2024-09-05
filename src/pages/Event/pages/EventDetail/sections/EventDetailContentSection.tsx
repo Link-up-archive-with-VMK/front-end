@@ -9,9 +9,9 @@ import {
 } from '@/components/shared';
 import { BROWSER_PATH } from '@/constants/path';
 import MatchingStandardAccordion from '@/pages/Event/components/MatchingStandardAccordion';
-import RecruitCountBox from '@/pages/Event/components/RecruitCountBox';
+// import RecruitCountBox from '@/pages/Event/components/RecruitCountBox';
 import { Event } from '@/types/event';
-import { EventStatus as EventStatusType, RecruitStatus } from '@/types/group';
+import { EventStatus as EventStatusType } from '@/types/group';
 
 interface EventDetailContentSectionProps {
   eventId: Event['eventId'];
@@ -53,7 +53,7 @@ const EventDetailContentSection: React.FC<EventDetailContentSectionProps> = ({
         title="장소"
         content={<Typography>{eventData.place}</Typography>}
       />
-      {eventData.status === EventStatusType.End ||
+      {/* {eventData.status === EventStatusType.End ||
       eventData.recruitStatus === RecruitStatus.Close ||
       eventData.recruitStatus === RecruitStatus.End ? (
         <RecruitCountBox
@@ -67,7 +67,7 @@ const EventDetailContentSection: React.FC<EventDetailContentSectionProps> = ({
           viNum={eventData.minNumV}
           guideNum={eventData.minNumG}
         />
-      )}
+      )} */}
       {eventData.isApply ? (
         <TitleContentRow
           title="내 파트너"
