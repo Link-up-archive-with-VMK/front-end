@@ -26,11 +26,19 @@ import { RootState } from '@/store/index';
 import { EventCategory, EventCityName } from '@/types/event';
 import { EventType } from '@/types/group';
 import getAuthority from '@/utils/authority';
+import isIOSSafari from '@/utils/isIOSSafari';
 import { addOneHour } from '@/utils/time';
 
 const NewEvent: React.FC = () => {
   const userData = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
+  const shouldUseTextBoxRole = isIOSSafari();
+  const getDateTimeInputProps = (
+    props: React.InputHTMLAttributes<HTMLInputElement> = {},
+  ) => ({
+    ...props,
+    ...(shouldUseTextBoxRole ? { role: 'textbox' as const } : {}),
+  });
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -214,7 +222,14 @@ const NewEvent: React.FC = () => {
             <InputBox
               required
               title="날짜"
-              inputElement={<TextField {...field} required type="date" />}
+              inputElement={
+                <TextField
+                  {...field}
+                  required
+                  type="date"
+                  inputProps={getDateTimeInputProps()}
+                />
+              }
             />
           )}
         />
@@ -228,7 +243,14 @@ const NewEvent: React.FC = () => {
             <InputBox
               required
               title="시작 시간"
-              inputElement={<TextField {...field} required type="time" />}
+              inputElement={
+                <TextField
+                  {...field}
+                  required
+                  type="time"
+                  inputProps={getDateTimeInputProps()}
+                />
+              }
             />
           )}
         />
@@ -248,7 +270,7 @@ const NewEvent: React.FC = () => {
                 <TextField
                   {...field}
                   type="time"
-                  inputProps={{ min: startTime }}
+                  inputProps={getDateTimeInputProps({ min: startTime })}
                 />
               }
             />
@@ -288,7 +310,13 @@ const NewEvent: React.FC = () => {
               multiline
               title="모집 시작일"
               subTitle="(추가 설정을 안 한 경우, 이벤트 생성 시점부터)"
-              inputElement={<TextField {...field} type="date" />}
+              inputElement={
+                <TextField
+                  {...field}
+                  type="date"
+                  inputProps={getDateTimeInputProps()}
+                />
+              }
             />
           )}
         />
@@ -316,6 +344,7 @@ const NewEvent: React.FC = () => {
                   {...field}
                   value={fieldState.isDirty ? field.value : date}
                   type="date"
+                  inputProps={getDateTimeInputProps()}
                 />
               }
             />
